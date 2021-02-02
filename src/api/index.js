@@ -1,13 +1,12 @@
-const BASE_URL = "https://api.unsplash.com/photos"
+const BASE_URL = "https://api.unsplash.com/photos?per_page=12"
+
 
 export async function getData(){
-  
-  const tokenHeader = {
-    headers: {
-      "Authorization": "Client-ID 7oTFDmKuqqPGu6_RnrCn6aZB8j8VpU19M1Ro5NIG63c" 
-    }
-  }
-  const request = await fetch(`${BASE_URL}`, tokenHeader);
-  const data = await request.json() 
-  console.log(data);
+ const request = await fetch(BASE_URL,{
+   headers:{
+     "Authorization": `Client_ID ${process.env.VUE_SECRET}` 
+   }
+ })
+ const data = await request.json() 
+ console.log(data);
 }
