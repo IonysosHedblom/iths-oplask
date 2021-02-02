@@ -3,6 +3,8 @@
     <Grid />
     <Search />
     <Card />
+
+    <button @click="fetchtest">get data</button>
   </div>
 </template>
 
@@ -18,6 +20,11 @@ export default {
     Grid,
     Search,
     Card,
+  },
+  methods: {
+    fetchtest() {
+      this.$root.fetchit();
+    },
   },
 };
 </script>

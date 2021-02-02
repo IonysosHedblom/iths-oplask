@@ -8,11 +8,15 @@ new Vue({
   router,
   data: function(){
     return {
-      data:[]
+      data: [],
+      favorites: [],
     }
   },
-  async created(){
-    this.data = await api.getData()
+  methods: {
+    async fetchit() {
+      // this.data.push()
+      await api.getData();
+    }
   },
   render: h => h(App)
 }).$mount('#app')
