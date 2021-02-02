@@ -1,10 +1,10 @@
 <template>
-  <h1>Gallery component</h1>
+  <h1>Grid component</h1>
 </template>
 
 <script>
 export default {
-  name: "Gallery",
+  name: "Grid",
 };
 </script>
 

@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <Gallery />
+    <Grid />
     <Search />
     <Card />
   </div>
@@ -8,14 +8,14 @@
 
 <script>
 // @ is an alias to /src
-import Gallery from "@/components/Gallery.vue";
+import Grid from "@/components/Grid.vue";
 import Search from "@/components/Search.vue";
-import Card from "@/components/Gallery.vue";
+import Card from "@/components/Card.vue";
 
 export default {
-  name: "Home",
+  name: "Gallery",
   components: {
-    Gallery,
+    Grid,
     Search,
     Card,
   },
