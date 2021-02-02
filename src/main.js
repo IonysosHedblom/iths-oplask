@@ -8,14 +8,19 @@ new Vue({
   router,
   data: function(){
     return {
-      data: [],
+      images: [],
       favorites: [],
+      inputData: '',
     }
   },
   methods: {
-    async fetchit() {
-      // this.data.push()
-      await api.getData();
+    async getInitialImages() {
+      console.log('this was run')
+      await api.getInitialImages();
+    },
+    async getSearchData() {
+      console.log('this was run 123' )
+      await api.getDataBySearch(this.inputData);
     }
   },
   render: h => h(App)

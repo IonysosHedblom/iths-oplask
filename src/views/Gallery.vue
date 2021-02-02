@@ -1,10 +1,12 @@
 <template>
   <div class="home">
-    <Grid />
+    <!-- <Grid v-if="images && !searchImages" v-bind:images="images" /> -->
+    <!-- <Grid v-else v-bind:images="searchImages" /> -->
     <Search />
+    <Grid />
     <Card />
 
-    <button @click="fetchtest">get data</button>
+    <button @click="getInitialImages">get data</button>
   </div>
 </template>
 
@@ -21,10 +23,21 @@ export default {
     Search,
     Card,
   },
+  data: function () {
+    return {
+      images: [],
+      searchImages: [],
+    };
+  },
   methods: {
-    fetchtest() {
-      this.$root.fetchit();
+    getInitialImages() {
+      // const images = this.$root.getInitialImages();
+      // this.images.push(images);
+      this.$root.getInitialImages();
     },
+    // getSearchImages() {
+    //   this.searchImages.push();
+    // }
   },
 };
 </script>
