@@ -5,6 +5,10 @@
 </template>
 
 <style>
+body{
+  margin: 0;
+  padding:0;
+}
 #app{
   margin: 0;
   padding: 0;

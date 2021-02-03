@@ -2,10 +2,15 @@
   <div class="home">
     <!-- <Grid v-if="images && !searchImages" v-bind:images="images" /> -->
     <!-- <Grid v-else v-bind:images="searchImages" /> -->
-    <Search />
+    <Search :page="page"/>
     <Grid v-bind:images="images" />
 
     <button @click="getInitialImages">get data</button>
+    <div>
+      <button @click="previousPage">Previous</button>
+      
+      <button @click="nextPage">Next</button>
+    </div>
   </div>
 </template>
 
@@ -21,7 +26,9 @@ export default {
     Search,
   },
   data: function () {
-    return {};
+    return {
+      page: 1,
+    };
   },
   computed: {
     images() {
@@ -37,6 +44,24 @@ export default {
     // getSearchImages() {
     //   this.searchImages.push();
     // }
+    nextPage(){
+      if(this.page == this.$root.images[0].length-1){
+
+        this.page = 1
+      } else {
+
+        this.page ++
+      }
+    },
+    previousPage(){
+      if(this.page > 1){
+        
+        this.page --
+      } else {
+        this.page = this.$root.images[0].length-1
+      }
+    }
+
   },
 };
 </script>
@@ -44,7 +69,7 @@ export default {
 <style  scoped>
  .home{
    max-width: 1500px;
-   width: 100%;
+   width: 70%;
    margin: 0 auto;
    display: flex;
    flex-direction: column;

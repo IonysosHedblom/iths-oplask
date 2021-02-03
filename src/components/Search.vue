@@ -10,10 +10,12 @@
 import * as api from "@/api";
 export default {
   name: "Search",
+  props:{
+    page:Number,
+  },
   data: function () {
     return {
       inputData: "",
-      page: 1,
     };
   },
   methods: {
