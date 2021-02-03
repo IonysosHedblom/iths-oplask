@@ -22,7 +22,7 @@ img {
   transition: 0.3s ease-in-out;
 }
 
-img:hover {
+/* img:hover {
   transform: scale(1.5);
-}
+} */
 </style>

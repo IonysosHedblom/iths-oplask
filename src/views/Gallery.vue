@@ -2,13 +2,12 @@
   <div class="home">
     <!-- <Grid v-if="images && !searchImages" v-bind:images="images" /> -->
     <!-- <Grid v-else v-bind:images="searchImages" /> -->
-    <Search :page="page"/>
+    <Search @inputData="getData" :page="page" />
     <Grid v-bind:images="images" />
 
-    <button @click="getInitialImages">get data</button>
-    <div>
+    <div class="buttons">
       <button @click="previousPage">Previous</button>
-      
+
       <button @click="nextPage">Next</button>
     </div>
   </div>
@@ -18,6 +17,7 @@
 // @ is an alias to /src
 import Grid from "@/components/Grid.vue";
 import Search from "@/components/Search.vue";
+import * as api from "@/api";
 
 export default {
   name: "Gallery",
@@ -28,6 +28,7 @@ export default {
   data: function () {
     return {
       page: 1,
+      inputData: "",
     };
   },
   computed: {
@@ -36,44 +37,46 @@ export default {
     },
   },
   methods: {
-    getInitialImages() {
-      // const images = this.$root.getInitialImages();
-      // this.images.push(images);
-      this.$root.getInitialImages();
+    getData(value) {
+      this.inputData = value;
     },
-    // getSearchImages() {
-    //   this.searchImages.push();
-    // }
-    nextPage(){
-      if(this.page == this.$root.images[0].length-1){
-
-        this.page = 1
+    async searchTest() {
+      this.$root.images = [];
+      const data = await api.getDataBySearch(this.inputData, this.page);
+      this.$root.images.push(data.results);
+    },
+    nextPage() {
+      if (this.page == this.$root.images[0].length - 1) {
+        this.page = 1;
+        this.searchTest();
       } else {
-
-        this.page ++
+        this.page++;
+        this.searchTest();
       }
     },
-    previousPage(){
-      if(this.page > 1){
-        
-        this.page --
+    previousPage() {
+      if (this.page > 1) {
+        this.page--;
       } else {
-        this.page = this.$root.images[0].length-1
+        this.page = this.$root.images[0].length - 1;
       }
-    }
-
+    },
   },
 };
 </script>
 
 <style  scoped>
- .home{
-   max-width: 1500px;
-   width: 70%;
-   margin: 0 auto;
-   display: flex;
-   flex-direction: column;
-   justify-content: center;
-   align-items: center;
- }
+.home {
+  max-width: 1500px;
+  width: 70%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.buttons {
+  margin: 50px 0;
+}
 </style>

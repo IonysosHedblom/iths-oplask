@@ -10,8 +10,8 @@
 import * as api from "@/api";
 export default {
   name: "Search",
-  props:{
-    page:Number,
+  props: {
+    page: Number,
   },
   data: function () {
     return {
@@ -20,12 +20,10 @@ export default {
   },
   methods: {
     async search() {
-      this.$root.images = []
+      this.$root.images = [];
       const data = await api.getDataBySearch(this.inputData, this.page);
       this.$root.images.push(data.results);
-    },
-    images() {
-      return this.$root.randomtest;
+      this.$emit("inputData", this.inputData);
     },
   },
 };
