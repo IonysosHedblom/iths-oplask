@@ -40,3 +40,15 @@ export default {
   },
 };
 </script>
+
+<style  scoped>
+ .home{
+   max-width: 1500px;
+   width: 100%;
+   margin: 0 auto;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+ }
+</style>

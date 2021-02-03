@@ -24,11 +24,11 @@ export default {
 
 <style scoped>
 .grid-section {
-  width: 70%;
+  width: 100%;
   display: grid;
-  grid-column-gap: 24px;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: 1fr;
+  gap: 15px;
+  grid-template-columns: 200px 200px 200px 200px;
+  grid-auto-rows: 250px;
 }
 
 /* .grid-item {

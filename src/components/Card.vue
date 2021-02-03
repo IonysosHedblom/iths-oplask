@@ -16,13 +16,13 @@ export default {
 <style scoped>
 img {
   width: 100%;
-  max-height: 100%;
+  height: 100%;
   object-fit: cover;
   cursor: pointer;
-  transition: 0.5s ease-in-out;
+  transition: 0.3s ease-in-out;
 }
 
 img:hover {
-  transform: scale(1.1);
+  transform: scale(1.5);
 }
 </style>
