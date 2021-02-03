@@ -3,11 +3,6 @@
     <label for="search">Search for images...</label>
     <input name="search" v-model="inputData" type="text" />
     <button @click.prevent="search">CLICK</button>
-    <ul>
-      <li v-for="(image, index) in this.$root.images[0]" :key="index">
-        {{ image.description }}
-      </li>
-    </ul>
   </form>
 </template>
 

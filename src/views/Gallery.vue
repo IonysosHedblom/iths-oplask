@@ -3,8 +3,7 @@
     <!-- <Grid v-if="images && !searchImages" v-bind:images="images" /> -->
     <!-- <Grid v-else v-bind:images="searchImages" /> -->
     <Search />
-    <Grid />
-    <Card />
+    <Grid v-bind:images="images" />
 
     <button @click="getInitialImages">get data</button>
   </div>
@@ -14,20 +13,20 @@
 // @ is an alias to /src
 import Grid from "@/components/Grid.vue";
 import Search from "@/components/Search.vue";
-import Card from "@/components/Card.vue";
 
 export default {
   name: "Gallery",
   components: {
     Grid,
     Search,
-    Card,
   },
   data: function () {
-    return {
-      images: [],
-      searchImages: [],
-    };
+    return {};
+  },
+  computed: {
+    images() {
+      return this.$root.images[0];
+    },
   },
   methods: {
     getInitialImages() {
