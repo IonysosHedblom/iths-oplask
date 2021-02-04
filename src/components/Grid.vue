@@ -33,5 +33,6 @@ export default {
 /* .grid-item {
   grid-column: span auto;
   grid-row: span auto;
+  asd
 } */
 </style>
