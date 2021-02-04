@@ -26,7 +26,7 @@ export default {
 .grid-section {
   display: grid;
   gap: 15px;
-  grid-template-columns: 250px 250px 250px 250px;
+  grid-template-columns: 270px 270px 270px 270px;
   grid-auto-rows: 350px;
 }
 
