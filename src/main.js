@@ -9,7 +9,6 @@ new Vue({
     return {
       favorites: [],
       images: [],
-      randomtest: [1,2,3,4,5,6,7,6,6,6,66,6],
     }
   },
   render: h => h(App)

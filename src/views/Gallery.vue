@@ -7,7 +7,6 @@
 
     <div class="buttons">
       <button @click="previousPage">Previous</button>
-
       <button @click="nextPage">Next</button>
     </div>
   </div>
@@ -55,12 +54,21 @@ export default {
       }
     },
     previousPage() {
-      if (this.page > 1) {
-        this.page--;
-      } else {
+      if (this.page == 1) {
         this.page = this.$root.images[0].length - 1;
+        this.searchTest();
+      } else {
+        this.page--;
+        this.searchTest();
       }
     },
+    async loadInitialImages() {
+      const data = await api.getInitialImages();
+      this.$root.images.push(data);
+    },
+  },
+  created() {
+    this.loadInitialImages();
   },
 };
 </script>
