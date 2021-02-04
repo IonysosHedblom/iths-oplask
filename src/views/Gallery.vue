@@ -2,7 +2,7 @@
   <div class="home">
     <!-- <Grid v-if="images && !searchImages" v-bind:images="images" /> -->
     <!-- <Grid v-else v-bind:images="searchImages" /> -->
-    <Search @inputData="getData" :page="page" />
+    <Search @inputData="getData" :page="page" :resetPage="resetPage" />
     <Grid v-bind:images="images" />
 
     <div class="buttons">
@@ -42,26 +42,28 @@ export default {
     async searchTest() {
       this.$root.images = [];
       const data = await api.getDataBySearch(this.inputData, this.page);
-      console.log(data);
       this.$root.images.push(data.results);
     },
     nextPage() {
-      // if (this.page == this.$root.images[0].length - 1) {
-      //   this.page = 1;
-      //   this.searchTest();
-      // } else {
+      if (this.page == this.$root.images[0].length - 1) {
+        this.page = 1;
+        this.searchTest();
+      } else {
         this.page++;
         this.searchTest();
-      // }
+      }
     },
     previousPage() {
-      // if (this.page == 1) {
-      //   this.page = this.$root.images[0].length - 1;
-        // this.searchTest();
-      // } else {
+      if (this.page == 1) {
+        this.page = this.$root.images[0].length - 1;
+        this.searchTest();
+      } else {
         this.page--;
         this.searchTest();
-      // }
+      }
+    },
+    resetPage() {
+      this.page = 1;
     },
     async loadInitialImages() {
       const data = await api.getInitialImages();
