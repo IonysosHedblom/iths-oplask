@@ -42,25 +42,26 @@ export default {
     async searchTest() {
       this.$root.images = [];
       const data = await api.getDataBySearch(this.inputData, this.page);
+      console.log(data);
       this.$root.images.push(data.results);
     },
     nextPage() {
-      if (this.page == this.$root.images[0].length - 1) {
-        this.page = 1;
-        this.searchTest();
-      } else {
+      // if (this.page == this.$root.images[0].length - 1) {
+      //   this.page = 1;
+      //   this.searchTest();
+      // } else {
         this.page++;
         this.searchTest();
-      }
+      // }
     },
     previousPage() {
-      if (this.page == 1) {
-        this.page = this.$root.images[0].length - 1;
-        this.searchTest();
-      } else {
+      // if (this.page == 1) {
+      //   this.page = this.$root.images[0].length - 1;
+        // this.searchTest();
+      // } else {
         this.page--;
         this.searchTest();
-      }
+      // }
     },
     async loadInitialImages() {
       const data = await api.getInitialImages();
