@@ -14,12 +14,12 @@ const routes = [
     component: Gallery
   },
   {
-    path: '/Favorites',
+    path: '/favorites',
     name: 'Favorites',
     component: Favorites
   },
   {
-    path: '/Single',
+    path: '/single/:index',
     name: 'Single',
     component: Single
   }

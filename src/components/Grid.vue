@@ -5,6 +5,7 @@
       v-bind:image="image"
       v-for="(image, index) in images"
       :key="index"
+      @click.native="changeRoute(index)"
     />
   </section>
 </template>
@@ -18,6 +19,11 @@ export default {
   },
   props: {
     images: Array,
+  },
+  methods: {
+    changeRoute(index) {
+      this.$router.push(`/single/${index}`);
+    },
   },
 };
 </script>

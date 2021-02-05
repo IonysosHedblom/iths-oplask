@@ -28,9 +28,6 @@ export default {
       this.$root.images.push(data.results);
       this.$emit("inputData", this.inputData);
     },
-    images() {
-      return this.$root.randomtest;
-    },
   },
 };
 </script>
