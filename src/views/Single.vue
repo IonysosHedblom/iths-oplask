@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <Card v-bind:image="image" />
   </div>
 </template>
@@ -10,7 +10,6 @@ export default {
   components: {
     Card,
   },
-
   computed: {
     image() {
       return this.$root.images[0][this.$route.params.index];
@@ -19,5 +18,10 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+.container {
+  max-width: 1700px;
+  width: 85%;
+  margin: 0 auto;
+}
 </style>

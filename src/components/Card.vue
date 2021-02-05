@@ -1,12 +1,19 @@
 <template>
-  <div class="img-wrapper">
+  <div v-bind:class="[hover ? 'hover-wrapper' : 'image-wrapper']">
     <div class="icon">
-    <i class="fas fa-heart"></i>
+      <i class="fas fa-heart"></i>
     </div>
-    <img class="main-image" v-bind:src="image.urls.small" />
+    <img
+      v-if="this.$route.path === '/'"
+      class="main-image"
+      v-bind:src="image.urls.small"
+    />
+    <img v-else class="large" v-bind:src="image.urls.full" />
     <div class="user">
-      <img :src="image.user.profile_image.large" alt="">
-      <a target="_blank" :href="image.user.portfolio_url">{{image.user.username}}</a>
+      <img :src="image.user.profile_image.large" alt="" />
+      <a target="_blank" :href="image.user.portfolio_url">{{
+        image.user.username
+      }}</a>
     </div>
   </div>
 </template>
@@ -14,18 +21,34 @@
 <script>
 export default {
   name: "Card",
+  data() {
+    return {
+      hover: true,
+    };
+  },
   props: {
     image: Object,
+  },
+  mounted() {
+    if (this.$route.path === "/" || this.$route.path === "/favorites") {
+      this.hover = true;
+    } else {
+      this.hover = false;
+    }
   },
 };
 </script>
 
 <style scoped>
-.img-wrapper{
+.hover-wrapper {
   position: relative;
 }
 
-.icon{
+.image-wrapper {
+  position: relative;
+}
+
+.icon {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -34,17 +57,24 @@ export default {
   top: 5%;
   z-index: 998;
   background-color: rgb(255, 255, 255);
+  border-radius: 5px 5px 5px 5px;
+  color: rgb(170, 170, 170);
+}
+
+.hover-wrapper .icon {
   width: 35px;
   height: 25px;
-  border-radius: 5px 5px 5px 5px;
-  color:rgb(170, 170, 170);
 }
 
-.icon:hover{
-  color:black;
+.image-wrapper .icon {
+  width: 50px;
+  height: 40px;
+}
+
+.icon:hover {
+  color: black;
   cursor: pointer;
 }
-
 
 .main-image {
   width: 100%;
@@ -55,34 +85,54 @@ export default {
   position: relative;
 }
 
-.img-wrapper:hover {
+.large {
+  width: 100%;
+  max-height: 1000px;
+  object-fit: cover;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+  position: relative;
+}
+
+.hover-wrapper:hover {
   transform: scale(1.5);
   z-index: 999;
 }
 
-.user{  
+.user {
   display: flex;
   align-items: center;
   justify-content: space-around;
   position: absolute;
   bottom: 5%;
   left: 5%;
-
 }
 
-.user > a{
+.hover-wrapper .user > a {
   text-decoration: none;
   color: rgb(255, 255, 255);
   font-size: 1rem;
   margin-left: 10px;
 }
 
-.user > img{
-border-radius: 100%;
-object-fit: cover;
-width: 35px;
-height: 35px;
-
+.hover-wrapper .user > img {
+  border-radius: 100%;
+  object-fit: cover;
+  width: 35px;
+  height: 35px;
 }
 
+.image-wrapper .user > a {
+  text-decoration: none;
+  color: rgb(255, 255, 255);
+  font-size: 1.5rem;
+  margin-left: 10px;
+}
+
+.image-wrapper .user > img {
+  border-radius: 100%;
+  object-fit: cover;
+  width: 50px;
+  height: 50px;
+}
 </style>
