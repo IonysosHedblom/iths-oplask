@@ -1,16 +1,15 @@
 <template>
-  <div v-bind:class="[hover ? 'hover-wrapper' : 'image-wrapper']">
-    <div class="icon">
-      <i class="fas fa-heart"></i>
-    </div>
-    <img
-      v-if="this.$route.path === '/'"
-      class="main-image"
-      v-bind:src="image.urls.small"
-    />
-    <img v-else class="large" v-bind:src="image.urls.full" />
+  <div class="card-wrapper">
+    <i class="icon-favorite fas fa-heart"></i>
+    <img class="image" :src="image.urls.small" />
     <div class="user">
-      <img :src="image.user.profile_image.large" alt="" />
+      <a target="_blank" :href="image.user.portfolio_url">
+        <img
+          class="profile-picture"
+          :src="image.user.profile_image.medium"
+          alt=""
+        />
+      </a>
       <a target="_blank" :href="image.user.portfolio_url">{{
         image.user.username
       }}</a>
@@ -21,118 +20,79 @@
 <script>
 export default {
   name: "Card",
-  data() {
-    return {
-      hover: true,
-    };
-  },
   props: {
     image: Object,
-  },
-  mounted() {
-    if (this.$route.path === "/" || this.$route.path === "/favorites") {
-      this.hover = true;
-    } else {
-      this.hover = false;
-    }
   },
 };
 </script>
 
 <style scoped>
-.hover-wrapper {
-  position: relative;
+a {
+  color: #fff;
+  text-decoration: none;
 }
 
-.image-wrapper {
-  position: relative;
-}
-
-.icon {
+.card-wrapper {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  overflow: hidden;
+}
+
+.user,
+.icon-favorite {
   position: absolute;
-  right: 5%;
-  top: 5%;
-  z-index: 998;
-  background-color: rgb(255, 255, 255);
-  border-radius: 5px 5px 5px 5px;
-  color: rgb(170, 170, 170);
 }
 
-.hover-wrapper .icon {
-  width: 35px;
-  height: 25px;
-}
-
-.image-wrapper .icon {
-  width: 50px;
-  height: 40px;
-}
-
-.icon:hover {
-  color: black;
-  cursor: pointer;
-}
-
-.main-image {
+.image {
   width: 100%;
   height: 100%;
   object-fit: cover;
   cursor: pointer;
   transition: 0.3s ease-in-out;
-  position: relative;
+  border-radius: 10px;
 }
 
-.large {
-  width: 100%;
-  max-height: 1000px;
-  object-fit: cover;
+.icon-favorite {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  right: 5%;
+  top: 5%;
+  width: 35px;
+  height: 25px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 5px;
+  color: rgb(170, 170, 170);
+}
+
+.icon-favorite:hover {
+  color: #f54e42;
   cursor: pointer;
-  transition: 0.3s ease-in-out;
-  position: relative;
 }
 
-.hover-wrapper:hover {
+.card-wrapper:hover {
   transform: scale(1.5);
   z-index: 999;
 }
 
 .user {
-  display: flex;
+  display: none;
   align-items: center;
-  justify-content: space-around;
-  position: absolute;
-  bottom: 5%;
-  left: 5%;
+  align-self: flex-end;
+  padding: 10px;
 }
 
-.hover-wrapper .user > a {
-  text-decoration: none;
-  color: rgb(255, 255, 255);
-  font-size: 1rem;
-  margin-left: 10px;
-}
-
-.hover-wrapper .user > img {
+.profile-picture {
   border-radius: 100%;
-  object-fit: cover;
-  width: 35px;
-  height: 35px;
-}
-
-.image-wrapper .user > a {
-  text-decoration: none;
-  color: rgb(255, 255, 255);
-  font-size: 1.5rem;
-  margin-left: 10px;
-}
-
-.image-wrapper .user > img {
-  border-radius: 100%;
-  object-fit: cover;
+  padding: 10px;
   width: 50px;
   height: 50px;
+}
+
+.card-wrapper:hover > .icon-favorite {
+  display: flex;
+}
+
+.card-wrapper:hover > .user {
+  display: flex;
 }
 </style>

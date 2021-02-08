@@ -1,8 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Gallery from '../views/Gallery.vue'
-import Favorites from '../views/Favorites.vue'
-import Single from '../views/Single.vue'
 
 
 Vue.use(VueRouter)
@@ -13,16 +11,6 @@ const routes = [
     name: 'Gallery',
     component: Gallery
   },
-  {
-    path: '/favorites',
-    name: 'Favorites',
-    component: Favorites
-  },
-  {
-    path: '/single/:index',
-    name: 'Single',
-    component: Single
-  }
 ]
 
 const router = new VueRouter({

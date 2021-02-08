@@ -13,7 +13,6 @@ export default {
   name: "Search",
   props: {
     page: Number,
-    resetPage: Function,
   },
   data: function () {
     return {
@@ -22,7 +21,6 @@ export default {
   },
   methods: {
     async search() {
-      this.resetPage();
       this.$root.images = [];
       const data = await api.getDataBySearch(this.inputData, this.page);
       this.$root.images.push(data.results);
