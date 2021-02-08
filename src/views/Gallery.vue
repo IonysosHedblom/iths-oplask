@@ -1,8 +1,8 @@
 <template>
   <div class="wrapper">
-    <search @submit="search" />
-    <button @click="toggleFavorites">Show Favorites</button>
-    <lightbox :images="images" ref="lightboxRef" />
+    <Search @submit="search" />
+    <button class="showFav-button" @click="toggleFavorites">SHOW FAVORITES</button>
+    <Lightbox :images="images" ref="lightboxRef" />
     <ul v-if="!showFavorites">
       <li v-for="(image, index) in images" :key="index">
         <Card @click.native="callLightbox(index)" :image="image" />
@@ -79,6 +79,25 @@ export default {
 .nav {
   color: #000;
   cursor: pointer;
+}
+.showFav-button{
+  background-color: black;
+  color: white;
+  border: 5px solid black;
+  border-radius: 5px 5px 5px 5px;
+  cursor: pointer;
+  transition: 0.5s;
+  outline: none;
+  font-weight: bold;
+}
+.showFav-button:hover{
+  color: rgb(0, 0, 0);
+  background-color: rgb(204, 204, 204);
+  border: 5px solid rgb(204, 204, 204);
+  box-shadow: 0 1px 6px 0 rgba(32, 33, 36, 0.28);
+  
+
+  
 }
 
 ul {

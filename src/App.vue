@@ -6,6 +6,7 @@
 
 <style>
 body{
+  zoom: 80%;
   margin: 0;
   padding:0;
 }

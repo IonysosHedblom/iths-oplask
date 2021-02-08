@@ -2,7 +2,7 @@
   <div class="card-wrapper">
     <i
       @click.stop="addToFavorites(image)"
-      class="icon-favorite fas fa-heart"
+     :class="[liked ? 'liked' : '']" class="icon-favorite fas fa-heart"
     ></i>
     <img class="image" :src="image.urls.small" />
     <div class="user">
@@ -27,15 +27,27 @@ export default {
     image: Object,
     cardIndex: Number,
   },
+  data(){
+    return{
+      liked: false,
+    }
+  },
   methods: {
     addToFavorites(image) {
       if (!this.$root.favorites.includes(image)) {
         this.$root.favorites.push(image);
+        this.liked = true
       } else {
         this.$root.favorites.splice(this.cardIndex, 1);
+        this.liked = false
       }
     },
-  },
+    // setClass(){
+    //   if( this.$root.favorites.includes(this.image)){
+         
+    //   }
+    }
+  
 };
 </script>
 
@@ -81,9 +93,12 @@ a {
   color: #f54e42;
   cursor: pointer;
 }
+.liked{
+  color: #f54e42;
+}
 
 .card-wrapper:hover {
-  transform: scale(1.5);
+  transform: scale(1.2);
   z-index: 999;
 }
 
