@@ -1,10 +1,20 @@
 <template>
   <div class="wrapper">
     <search @submit="search" />
+    <button @click="toggleFavorites">Show Favorites</button>
     <lightbox :images="images" ref="lightboxRef" />
-    <ul>
+    <ul v-if="!showFavorites">
       <li v-for="(image, index) in images" :key="index">
         <Card @click.native="callLightbox(index)" :image="image" />
+      </li>
+    </ul>
+    <ul v-else>
+      <li v-for="(image, index) in favorites" :key="index">
+        <Card
+          :cardIndex="index"
+          @click.native="callLightbox(index)"
+          :image="image"
+        />
       </li>
     </ul>
   </div>
@@ -21,11 +31,15 @@ export default {
     return {
       page: 1,
       inputData: "",
+      showFavorites: false,
     };
   },
   computed: {
     images() {
       return this.$root.images[0];
+    },
+    favorites() {
+      return this.$root.favorites;
     },
   },
   methods: {
@@ -39,6 +53,16 @@ export default {
       this.$refs.lightboxRef.index = index;
       this.$refs.lightboxRef.show = true;
     },
+    toggleFavorites() {
+      this.showFavorites = !this.showFavorites;
+    },
+    async loadInitialImages() {
+      const data = await api.getInitialImages();
+      this.$root.images.push(data);
+    },
+  },
+  created() {
+    this.loadInitialImages();
   },
   components: { Card, Search, Lightbox },
 };

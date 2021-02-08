@@ -1,6 +1,9 @@
 <template>
   <div class="card-wrapper">
-    <i class="icon-favorite fas fa-heart"></i>
+    <i
+      @click.stop="addToFavorites(image)"
+      class="icon-favorite fas fa-heart"
+    ></i>
     <img class="image" :src="image.urls.small" />
     <div class="user">
       <a target="_blank" :href="image.user.portfolio_url">
@@ -22,6 +25,16 @@ export default {
   name: "Card",
   props: {
     image: Object,
+    cardIndex: Number,
+  },
+  methods: {
+    addToFavorites(image) {
+      if (!this.$root.favorites.includes(image)) {
+        this.$root.favorites.push(image);
+      } else {
+        this.$root.favorites.splice(this.cardIndex, 1);
+      }
+    },
   },
 };
 </script>
