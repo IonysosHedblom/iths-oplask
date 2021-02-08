@@ -20,11 +20,14 @@
 
 <script>
 export default {
+  props: {
+    images: Array,
+  },
   data() {
     return {
       show: false,
       index: 0,
-      images: this.$root.images[0],
+      // images: this.$root.images[0],
     };
   },
   methods: {

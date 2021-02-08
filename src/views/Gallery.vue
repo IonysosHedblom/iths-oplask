@@ -1,10 +1,10 @@
 <template>
   <div class="wrapper">
     <search @submit="search" />
-    <lightbox />
+    <lightbox :images="images" ref="lightboxRef" />
     <ul>
       <li v-for="(image, index) in images" :key="index">
-        <Card :image="image" />
+        <Card @click.native="callLightbox(index)" :image="image" />
       </li>
     </ul>
   </div>
@@ -33,6 +33,11 @@ export default {
       this.$root.images = [];
       const data = await api.getDataBySearch(this.inputData, this.page);
       this.$root.images.push(data.results);
+    },
+
+    callLightbox(index) {
+      this.$refs.lightboxRef.index = index;
+      this.$refs.lightboxRef.show = true;
     },
   },
   components: { Card, Search, Lightbox },
