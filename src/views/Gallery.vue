@@ -1,7 +1,10 @@
 <template>
   <div class="wrapper">
-    <Search @submit="search" />
-    <button class="showFav-button" @click="toggleFavorites">SHOW FAVORITES</button>
+    <Search ref="searchRef" />
+    <Pagination v-if="!showFavorites" />
+    <button class="showFav-button" @click="toggleFavorites">
+      SHOW FAVORITES
+    </button>
     <Lightbox :images="images" ref="lightboxRef" />
     <ul v-if="!showFavorites">
       <li v-for="(image, index) in images" :key="index">
@@ -25,6 +28,7 @@ import Card from "../components/Card.vue";
 import Lightbox from "../components/Lightbox.vue";
 import Search from "../components/Search.vue";
 import * as api from "@/api";
+import Pagination from "../components/Pagination.vue";
 
 export default {
   data: function () {
@@ -43,12 +47,6 @@ export default {
     },
   },
   methods: {
-    async search() {
-      this.$root.images = [];
-      const data = await api.getDataBySearch(this.inputData, this.page);
-      this.$root.images.push(data.results);
-    },
-
     callLightbox(index) {
       this.$refs.lightboxRef.index = index;
       this.$refs.lightboxRef.show = true;
@@ -64,7 +62,7 @@ export default {
   created() {
     this.loadInitialImages();
   },
-  components: { Card, Search, Lightbox },
+  components: { Card, Search, Lightbox, Pagination },
 };
 </script>
 
@@ -80,7 +78,7 @@ export default {
   color: #000;
   cursor: pointer;
 }
-.showFav-button{
+.showFav-button {
   background-color: black;
   color: white;
   border: 5px solid black;
@@ -90,14 +88,11 @@ export default {
   outline: none;
   font-weight: bold;
 }
-.showFav-button:hover{
+.showFav-button:hover {
   color: rgb(0, 0, 0);
   background-color: rgb(204, 204, 204);
   border: 5px solid rgb(204, 204, 204);
   box-shadow: 0 1px 6px 0 rgba(32, 33, 36, 0.28);
-  
-
-  
 }
 
 ul {

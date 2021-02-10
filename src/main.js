@@ -9,6 +9,8 @@ new Vue({
     return {
       favorites: [],
       images: [],
+      page: 1,
+      totalPages: [],
     }
   },
   render: h => h(App)

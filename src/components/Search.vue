@@ -22,8 +22,11 @@ export default {
   methods: {
     async search() {
       this.$root.images = [];
+      this.$root.totalPages = [];
+      this.$root.page = 1;
       const data = await api.getDataBySearch(this.inputData, this.page);
       this.$root.images.push(data.results);
+      this.$root.totalPages.push(data.total_pages);
       this.$emit("inputData", this.inputData);
     },
   },

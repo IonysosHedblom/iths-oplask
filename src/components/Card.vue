@@ -43,10 +43,6 @@ export default {
         this.liked = false;
       }
     },
-    // setClass(){
-    //   if( this.$root.favorites.includes(this.image)){
-
-    //   }
   },
 };
 </script>
