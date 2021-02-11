@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper">
-    <Search @submit="search" />
+    <Search />
     <button class="showFav-button" @click="toggleFavorites">
       SHOW FAVORITES
     </button>
@@ -37,7 +37,7 @@ export default {
   },
   computed: {
     images() {
-      return this.$store.state.images[0];
+      return this.$store.state.images;
     },
     favorites() {
       return this.$store.state.favorites;

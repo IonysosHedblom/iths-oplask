@@ -14,7 +14,7 @@ export default new Vuex.Store({
       state.images = [];
     },
     pushToImage(state, payload){
-      state.images.push(payload);
+      state.images.push(...payload);
     },
     pushToFavorites(state, payload){
       state.favorites.push(payload);
@@ -40,6 +40,4 @@ export default new Vuex.Store({
       commit('removeFromFavorites', payload);
     }
   },
-  modules: {
-  }
 })
