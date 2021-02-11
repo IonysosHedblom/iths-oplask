@@ -11,6 +11,8 @@ new Vue({
     return {
       favorites: [],
       images: [],
+      page: 1,
+      totalPages: [],
     }
   },
 
