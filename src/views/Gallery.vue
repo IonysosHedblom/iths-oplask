@@ -24,7 +24,6 @@
 import Card from "../components/Card.vue";
 import Lightbox from "../components/Lightbox.vue";
 import Search from "../components/Search.vue";
-import * as api from "@/api";
 
 export default {
   data: function () {
@@ -36,17 +35,19 @@ export default {
   },
   computed: {
     images() {
-      return this.$root.images[0];
+      return this.$store.state.images[0];
     },
     favorites() {
-      return this.$root.favorites;
+      return this.$store.state.favorites;
     },
   },
   methods: {
-    async search() {
-      this.$root.images = [];
-      const data = await api.getDataBySearch(this.inputData, this.page);
-      this.$root.images.push(data.results);
+     search() {
+      // this.$root.images = [];
+      const payload = {input:this.inputData , page:this.page}
+      this.$store.dispatch('search', payload)
+      // const data = await api.getDataBySearch(this.inputData, this.page);
+      // this.$root.images.push(data.results);
     },
 
     callLightbox(index) {
@@ -56,13 +57,13 @@ export default {
     toggleFavorites() {
       this.showFavorites = !this.showFavorites;
     },
-    async loadInitialImages() {
-      const data = await api.getInitialImages();
-      this.$root.images.push(data);
-    },
+    // async loadInitialImages() {
+    //   const data = await api.getInitialImages();
+    //   this.$root.images.push(data);
+    // },
   },
   created() {
-    this.loadInitialImages();
+    this.$store.dispatch('loadInitialImages')
   },
   components: { Card, Search, Lightbox },
 };
