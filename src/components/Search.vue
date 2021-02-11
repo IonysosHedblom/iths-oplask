@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import * as api from "@/api";
+// import * as api from "@/api";
 export default {
   name: "Search",
   props: {
@@ -21,10 +21,11 @@ export default {
   },
   methods: {
     async search() {
-      this.$root.images = [];
-      const data = await api.getDataBySearch(this.inputData, this.page);
-      this.$root.images.push(data.results);
-      this.$emit("inputData", this.inputData);
+      const payload = {
+        input: this.inputData,
+        page: this.page,
+      };
+      this.$store.dispatch("search", payload);
     },
   },
 };
