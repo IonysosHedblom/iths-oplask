@@ -1,6 +1,6 @@
 <template>
   <div class="menu">
-    <nav v-if="this.$root.totalPages[0] > 0">
+    <nav v-if="this.$store.state.totalPages[0] > 0">
       <a @click="prev">
         <i class="fas fa-angle-left fa-10x"></i>
       </a>
@@ -16,23 +16,32 @@
 export default {
   methods: {
     next() {
-      if (this.page + 1 <= this.$root.totalPages[0]) {
-        this.$root.page += 1;
+      if (this.page + 1 <= this.$store.state.totalPages[0]) {
+        this.$store.state.page += 1;
+        this.search();
       }
     },
     prev() {
       if (this.page - 1 >= 1) {
-        this.$root.page -= 1;
+        this.$store.state.page -= 1;
+        this.search();
       }
+    },
+    async search() {
+      const payload = {
+        input: this.$store.state.inputData,
+        page: this.$store.state.page,
+      };
+      this.$store.dispatch("search", payload);
     },
   },
 
   computed: {
     totalPages() {
-      return this.$root.totalPages[0];
+      return this.$store.state.totalPages[0];
     },
     page() {
-      return this.$root.page;
+      return this.$store.state.page;
     },
   },
 };

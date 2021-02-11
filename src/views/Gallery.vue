@@ -1,6 +1,7 @@
 <template>
   <div class="wrapper">
     <Search />
+    <Pagination v-if="!showFavorites" />
     <button class="showFav-button" @click="toggleFavorites">
       SHOW FAVORITES
     </button>
@@ -25,6 +26,7 @@
 <script>
 import Card from "../components/Card.vue";
 import Lightbox from "../components/Lightbox.vue";
+import Pagination from "../components/Pagination.vue";
 import Search from "../components/Search.vue";
 
 export default {
@@ -55,7 +57,7 @@ export default {
   created() {
     this.$store.dispatch("loadInitialImages");
   },
-  components: { Card, Search, Lightbox },
+  components: { Card, Search, Lightbox, Pagination },
 };
 </script>
 

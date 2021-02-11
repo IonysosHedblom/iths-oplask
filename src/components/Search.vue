@@ -23,8 +23,8 @@ export default {
     async search() {
       const payload = {
         input: this.inputData,
-        page: this.page,
       };
+      console.log(payload);
       this.$store.dispatch("search", payload);
     },
   },

@@ -7,16 +7,25 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     favorites: [],
-    images: [], 
+    images: [],
+    inputData: "dog",
+    page: 1,
+    totalPages: [],
   },
   mutations: {
-    resetImages(state){
+    resetTotalPages(state) {
+      state.totalPages = [];
+    },
+    pushToTotalPages(state, payload) {
+      state.totalPages.push(payload);
+    },
+    resetImages(state) {
       state.images = [];
     },
-    pushToImage(state, payload){
+    pushToImage(state, payload) {
       state.images.push(...payload);
     },
-    pushToFavorites(state, payload){
+    pushToFavorites(state, payload) {
       state.favorites.push(payload);
     },
     removeFromFavorites(state, payload) {
@@ -24,9 +33,11 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    async search({ commit } , payload) {
+    async search({ commit }, payload) {
       commit('resetImages')
+      commit('resetTotalPages')
       const data = await api.getDataBySearch(payload.input, payload.page);
+      commit('pushToTotalPages', data.total_pages)
       commit('pushToImage', data.results)
     },
     async loadInitialImages({ commit }) {

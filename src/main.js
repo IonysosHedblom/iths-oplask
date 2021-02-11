@@ -9,10 +9,6 @@ new Vue({
 
   data: function () {
     return {
-      favorites: [],
-      images: [],
-      page: 1,
-      totalPages: [],
     }
   },
 
