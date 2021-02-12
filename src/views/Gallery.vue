@@ -5,16 +5,20 @@
     <button class="showFav-button" @click="toggleFavorites">
       SHOW FAVORITES
     </button>
-    <Lightbox :images="images" ref="lightboxRef" />
+    <Lightbox :images="showFavorites ? favorites : images" ref="lightboxRef" />
     <ul v-if="!showFavorites">
       <li v-for="(image, index) in images" :key="index">
-        <Card @click.native="callLightbox(index)" :image="image" />
+        <Card
+          :index="index"
+          @click.native="callLightbox(index)"
+          :image="image"
+        />
       </li>
     </ul>
-    <ul v-else>
+    <ul v-if="showFavorites">
       <li v-for="(image, index) in favorites" :key="index">
         <Card
-          :cardIndex="index"
+          :index="index"
           @click.native="callLightbox(index)"
           :image="image"
         />
@@ -48,6 +52,7 @@ export default {
   methods: {
     callLightbox(index) {
       this.$refs.lightboxRef.index = index;
+
       this.$refs.lightboxRef.show = true;
     },
     toggleFavorites() {

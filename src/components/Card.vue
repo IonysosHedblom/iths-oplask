@@ -2,7 +2,7 @@
   <div class="card-wrapper">
     <i
       @click.stop="addToFavorites(image)"
-      :class="[liked ? 'liked' : '']"
+      :class="liked ? 'liked' : ''"
       class="icon-favorite fas fa-heart"
     ></i>
     <img class="image" :src="image.urls.small" />
@@ -26,7 +26,7 @@ export default {
   name: "Card",
   props: {
     image: Object,
-    cardIndex: Number,
+    index: Number,
   },
   data() {
     return {
@@ -36,11 +36,12 @@ export default {
   methods: {
     addToFavorites(image) {
       if (!this.$store.state.favorites.includes(image)) {
-        this.$store.dispatch("pushToFavorites", image);
+        console.log(image);
         this.liked = true;
+        this.$store.dispatch("pushToFavorites", image);
       } else {
-        this.$store.dispatch("removeFromFavorites", this.cardIndex);
         this.liked = false;
+        this.$store.dispatch("removeFromFavorites", this.cardIndex);
       }
     },
     // setClass(){

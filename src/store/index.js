@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import * as api from "@/api";
-
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -30,13 +29,18 @@ export default new Vuex.Store({
     },
     removeFromFavorites(state, payload) {
       state.favorites.splice(payload, 1);
+    },
+    setSearchInput(state, payload) {
+      state.inputData = payload;
     }
   },
   actions: {
     async search({ commit }, payload) {
+      const { input, page } = payload;
       commit('resetImages')
       commit('resetTotalPages')
-      const data = await api.getDataBySearch(payload.input, payload.page);
+      const data = await api.getDataBySearch(input, page);
+      commit('setSearchInput', input);
       commit('pushToTotalPages', data.total_pages)
       commit('pushToImage', data.results)
     },
