@@ -3,7 +3,7 @@
     <Search />
     <Pagination v-if="!showFavorites" />
     <button class="showFav-button" @click="toggleFavorites">
-      SHOW FAVORITES
+      {{ btnText }}
     </button>
     <Lightbox :images="showFavorites ? favorites : images" ref="lightboxRef" />
     <ul v-if="!showFavorites">
@@ -41,6 +41,7 @@ export default {
       page: 1,
       inputData: "",
       showFavorites: false,
+      btnText: "Show Favorites",
     };
   },
   computed: {
@@ -59,6 +60,11 @@ export default {
     },
     toggleFavorites() {
       this.showFavorites = !this.showFavorites;
+      if (this.showFavorites) {
+        this.btnText = "Show Gallery";
+      } else {
+        this.btnText = "Show Favorites";
+      }
     },
   },
   created() {
@@ -87,6 +93,7 @@ export default {
   border-radius: 5px 5px 5px 5px;
   cursor: pointer;
   transition: 0.5s;
+  font-size: 1rem;
   outline: none;
   font-weight: bold;
 }
@@ -100,9 +107,10 @@ export default {
 ul {
   display: grid;
   gap: 15px;
-  grid-template-columns: 270px 270px 270px 270px;
+  grid-template-columns: 270px 270px 270px 270px 270px;
   grid-auto-rows: 350px;
 }
+
 li {
   display: grid;
   list-style: none;
