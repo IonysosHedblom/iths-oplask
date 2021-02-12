@@ -27,6 +27,7 @@ export default {
   props: {
     image: Object,
     index: Number,
+    id: String,
   },
   data() {
     return {
@@ -41,7 +42,7 @@ export default {
         this.$store.dispatch("pushToFavorites", image);
       } else {
         this.liked = false;
-        this.$store.dispatch("removeFromFavorites", this.cardIndex);
+        this.$store.dispatch("removeFromFavorites", this.index);
       }
     },
     // setClass(){

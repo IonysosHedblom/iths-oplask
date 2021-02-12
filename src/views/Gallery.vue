@@ -7,8 +7,9 @@
     </button>
     <Lightbox :images="showFavorites ? favorites : images" ref="lightboxRef" />
     <ul v-if="!showFavorites">
-      <li v-for="(image, index) in images" :key="index">
+      <li v-for="(image, index) in images" :key="image.id">
         <Card
+          :id="image.id"
           :index="index"
           @click.native="callLightbox(index)"
           :image="image"
@@ -16,8 +17,9 @@
       </li>
     </ul>
     <ul v-if="showFavorites">
-      <li v-for="(image, index) in favorites" :key="index">
+      <li v-for="(image, index) in favorites" :key="image.id">
         <Card
+          :id="image.id"
           :index="index"
           @click.native="callLightbox(index)"
           :image="image"
