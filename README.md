@@ -1,4 +1,7 @@
-# iths-oplask
+# Link to a demo below
+https://ionysoshedblom.github.io/iths-oplask/
+
+# iths-oplask 
 
 ## Project setup
 ```
